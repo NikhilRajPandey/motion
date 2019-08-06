@@ -15,10 +15,36 @@ If Time was not given but we gave to find s then we have to use III equation
 
 All the args of function that are given to you in  are SI UNIT
 '''
+
 class Motion:
+    def __init__(self,a=None,u=None,v=None,s=None,t=None,avg=None):
+        self.accelaration = a
+        self.initVelocity = u
+        self.finalVelociy = v
+        self.distanceTraveled = s
+        self.time = t
+        self.avgVelocity = avg
+    
+    '''Basic Formulas'''
+    # You need to first Make object of Motion for using this
+
+    def accelfromTUV(self):
+        if all(variables != None for variables in [self.finalVelociy,self.initVelocity,self.time]):
+            self.accelaration = (self.finalVelociy - self.initVelocity) / self.time
+            return self.accelaration
+        else:
+            print("Wrong Var")
+    
+    def avgVelocityWithoutDisplacement(self):
+        self.avgVelocity = (self.initVelocity + self.finalVelociy) / 2
+        return self.avgVelocity
+
     @staticmethod
     def fromGiven(find,**given):
         '''
+        This Function is static Means:
+        You can use it without Making Motion Object.
+
         Suppose You want to find acceleration then you can write like this: 
 
         Motion.fromGiven('a',u=5,t=2,v=10)
@@ -76,5 +102,5 @@ class Motion:
             result = (((given['v']*given['v']) - (given['u']*given['u']))/ (2 * given['a']))
             return result
 
-a = Motion.fromGiven('s',v=0,t=6,a=-6)
-print(a)
+a = Motion(a=None,u=23,v=5,t=5)
+print(a.accelfromTUV())
